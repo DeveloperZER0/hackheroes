@@ -11,6 +11,6 @@ app.get('/', async (req, res) => {
     res.json(allMarkers)
   })
 
-app.listen(5000, () =>
+app.listen(3000, () =>
   console.log('REST API server ready at: http://localhost:3000'),
 )
