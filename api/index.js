@@ -5,7 +5,9 @@ var cors = require('cors')
 
 const app = express() //express
 
-app.use(cors())
+app.use(cors({
+  origin: ['https://hackheroesweb.onrender.com/', 'http://localhost:3000']
+}))
 
 app.get('/', async (req, res) => {
     const allMarkers = await prisma.post.findMany()
