@@ -6,7 +6,7 @@ var cors = require('cors')
 const app = express() //express
 
 app.use(cors({
-  origin: ['https://hackheroesweb.onrender.com/', 'http://localhost:3000']
+  origin: ['https://hackheroesweb.onrender.com', 'http://localhost:3000']
 }))
 
 app.get('/', async (req, res) => {
