@@ -1,12 +1,17 @@
 <script>
 import "leaflet/dist/leaflet.css";
 import L, { marker } from "leaflet";
+
 export default {
   data() {
     return {
       map: null,
-      markers: ['id', 'lat', 'lon','desc'],
+      markers: [],
     };
+  },
+  async fetch() {
+    this.markers = await fetch("https://hackheroesmarkers.onrender.com").then((res) => res.json());
+    console.log(this.markers);
   },
   mounted() {
     this.map = L.map("map").setView([51.5, -0.09], 5);
