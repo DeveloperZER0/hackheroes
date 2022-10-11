@@ -12,7 +12,18 @@
 <script setup>
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+var url = "https://hackheroesmarkers.onrender.com";
 
+var xhr = new XMLHttpRequest();
+xhr.open("GET", url);
+
+xhr.onreadystatechange = function () {
+   if (xhr.readyState === 4) {
+      console.log(xhr.status);
+      console.log(xhr.responseText);
+   }};
+
+xhr.send();
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 1000 );
 const renderer = new THREE.WebGLRenderer({
