@@ -10,7 +10,7 @@ export default {
   },
   methods: {
     async getData() {
-      this.markers = await fetch("https://hackheroesmarkers.onrender.com").then((res) => res.json());
+      this.markers = fetch("/markers").then((res) => res.json());
     },
   },
   async mounted() {
@@ -18,9 +18,10 @@ export default {
     this.map = L.map("map").setView([51.5, -0.09], 5);
     this.map.flyTo([52.0692924089, 19.4803067985], 6.75);
     L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {}).addTo(this.map);
-    for (let i = 0; i <= this.markers.length-1; i++) {
+    if(this.markers.length != 0) {
+      for (let i = 0; i <= this.markers.length-1; i++) {
       L.marker([this.markers[i].lat, this.markers[i].lon]).addTo(this.map).bindPopup(this.markers[i].desc).openPopup();
-      
+    }
     }
   },
 }
@@ -33,6 +34,6 @@ export default {
 
 <style scoped>
 #map{
-  height: 100vh;
+  height: 50vh;
 }
 </style>

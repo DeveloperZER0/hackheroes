@@ -1,11 +1,16 @@
 <template>
 <div>
-    <div class="w-full h-screen grid grid-cols-3">
-        <div class="grid col-start-1 col-end-2 bg-white rounded-r-3xl">
-        <h1 class="text-slate-900 uppercase font-black text-8xl">SPOTTED</h1>
+    <div>
+        <div class="w-full h-screen grid bg-slate-600 mix-blend-multiply">
+        <!-- <h1 class="text-slate-700 uppercase font-black text-9xl text-center m-auto mix-blend-multiply">SPOTTED</h1> --> 
         </div>
+        <img src="~/assets/img/logo.png" alt="logo" class="m-auto absolute top-0 bottom-0 left-0 right-0"/>
     </div>
-    <map-leaf></map-leaf>
+    <div class="grid grid-cols-3 rounded-3xl">
+        <map-leaf class="grid col-start-1 col-end-3"></map-leaf>
+        <div class="h-[50vh] w-full bg-white grid col-start-3 col-end-4"></div>
+    </div>
+    
 </div>
 </template>
 
@@ -32,7 +37,7 @@ function onWindowResize(){
 }
 renderer.physicallyCorrectLights = true;
 camera.position.setZ(20);
-scene.background = new THREE.Color( 0xffffff );
+scene.background = new THREE.Color( 0xaaddFF );
 const loader = new GLTFLoader();
 var earth;
 renderer.render(scene,camera);
@@ -56,7 +61,7 @@ light[4].position.set(-1, 4, -3 );
 
 scene.add(light[0], light[1],light[2],light[3],light[4]);
 
-loader.load( '/assets/models/low_poly_earth.gltf', function ( gltf ) {
+loader.load( '~/assets/models/low_poly_earth.gltf', function ( gltf ) {
     let obj = new Array(2);
     earth = gltf.scene;
     earth.traverse( child => {
@@ -76,22 +81,12 @@ loader.load( '/assets/models/low_poly_earth.gltf', function ( gltf ) {
     });
     obj[1].material.color.setHex(0x00aaFF);
 
-    earth.position.set( 5, 0, 0 );
     earth.scale.set( 3, 3, 3 );
     scene.add( earth );
 }, undefined, function ( error ) {
 	console.error( error );
 } );
-const geometry = new THREE.PlaneGeometry( 30, 15 );
-const material = new THREE.MeshPhongMaterial({
-  color: 'black',
-  emissive: 0xB1E1FF,
-  shininess: 50,
-  side: THREE.DoubleSide,
-});
-const plane = new THREE.Mesh( geometry, material );
-scene.add( plane );
-plane.position.set( 0, 0, -4 );
+
 function animate() {
 	requestAnimationFrame( animate );
     if (earth != null){
