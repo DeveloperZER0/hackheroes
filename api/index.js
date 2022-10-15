@@ -7,13 +7,13 @@ const app = express()
 
 app.use(cors())
 app.get('/', async (req, res) => {
-    const allMarkers = await prisma.post.findMany({
+    const allMarkers = await prisma.category.findMany({
       include: {
-        cat: true
+        markers: true
       }
-    })
-    res.json(allMarkers)
-  })
+    });
+    res.json(allMarkers);
+})
 
 app.listen(3000, () =>
   console.log('REST API server ready'),
