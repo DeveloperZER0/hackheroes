@@ -15,4 +15,11 @@ model Post {
   lat       Float
   lon       Float
   desc      String?
+  cat       Category @relation(fields: [categoryType], references: [type])
+  categoryType String
+}
+model Category{
+  id        Int      @id @default(autoincrement())
+  type      String    @unique
+  markers   Post[]
 }

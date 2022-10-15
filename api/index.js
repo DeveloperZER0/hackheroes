@@ -7,7 +7,11 @@ const app = express()
 
 app.use(cors())
 app.get('/', async (req, res) => {
-    const allMarkers = await prisma.post.findMany()
+    const allMarkers = await prisma.post.findMany({
+      include: {
+        cat: true
+      }
+    })
     res.json(allMarkers)
   })
 
