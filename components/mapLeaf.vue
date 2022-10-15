@@ -20,7 +20,7 @@ export default {
     L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {}).addTo(this.map);
     if(this.markers.length != 0) {
       for (let i = 0; i <= this.markers.length-1; i++) {
-      L.marker([this.markers[i].lat, this.markers[i].lon]).addTo(this.map).bindPopup(this.markers[i].desc).openPopup();
+      L.marker([this.markers[i].lat, this.markers[i].lon]).addTo(this.map).bindPopup(this.markers[i].desc + "<br>Kategoria: " + this.markers[i].categoryType).openPopup();
     }
     }
   },
