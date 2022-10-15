@@ -61,7 +61,7 @@ light[4].position.set(-1, 4, -3 );
 
 scene.add(light[0], light[1],light[2],light[3],light[4]);
 
-loader.load( '../assets/models/low_poly_earth.gltf', function ( gltf ) {
+loader.load( '/models/low_poly_earth.gltf', function ( gltf ) {
     let obj = new Array(2);
     earth = gltf.scene;
     earth.traverse( child => {
