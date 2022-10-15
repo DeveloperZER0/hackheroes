@@ -5,11 +5,8 @@ var cors = require('cors')
 
 const app = express()
 
-app.use(cors({
-  origin: ['*']
-}))
-
-app.get('/markers', async (req, res) => {
+app.use(cors())
+app.get('/', async (req, res) => {
     const allMarkers = await prisma.post.findMany()
     res.json(allMarkers)
   })

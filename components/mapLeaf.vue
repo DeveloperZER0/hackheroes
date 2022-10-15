@@ -10,7 +10,7 @@ export default {
   },
   methods: {
     async getData() {
-      this.markers = fetch("/markers").then((res) => res.json());
+      this.markers = fetch("https://hackheroesmarkers.onrender.com").then((res) => res.json());
     },
   },
   async mounted() {
