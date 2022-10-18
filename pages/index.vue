@@ -1,3 +1,59 @@
+<script>
+import {mapLeaflet} from '@/components/mapLeaf.vue'
+import L, { marker, addLayer, latLng } from "leaflet";
+import { exit } from 'process';
+var Marker;
+var latCenter,lngCenter;
+export default {
+    data() {
+        return {
+            form:  [{id:1,is:'input',type:'text',label:'Tytuł zgłoszenia',itemId:'title'},
+                    {id:2,is:'input',type:'text',label:'Koordynaty miejsca na mapie',itemId:'coords'},
+                    {id:3,is:'select',type:'',label:'Wybierz kategorię zgłoszenia',itemId:'select'}
+            ],
+            kategorie: [],
+        };
+    },
+    methods: {
+        async getData() {
+            this.kategorie = await fetch("https://api-spotted-developerzer0.vercel.app/category").then((res) => res.json());
+        },
+        async sendData(data) {
+            if (data != 0) {
+                await fetch("https://api-spotted-developerzer0.vercel.app/receive", {method: 'POST', headers: {"Content-Type": "application/json"}, body: JSON.stringify(data)})
+                console.log(JSON.stringify(data));
+            }
+        },
+        async center() {
+            var koordynaty = document.getElementById("coords");
+            latCenter = mapLeaflet.getCenter().lat;
+            lngCenter = mapLeaflet.getCenter().lng;
+            koordynaty.value = latCenter + "; " + lngCenter;
+            
+            //Marker.setLatLng([latCenter,lngCenter]).update();
+        },
+        /*async createMarker() {
+            Marker = L.marker(mapLeaflet.getCenter()).addTo(mapLeaflet);
+        },*/
+        compData() {
+            var cdesc = document.getElementById("title").value;
+            var select = document.getElementById('select').value;
+            if (cdesc != null || cdesc != undefined || cdesc != ''){
+                var cdata = {"lat": latCenter,"lon": lngCenter,"desc": cdesc,"categoryType": select};
+                return cdata;
+            } else {
+                return 0;
+            }
+            
+        }
+    },
+    async mounted() {
+        await this.getData();
+        //this.createMarker();
+    }
+}
+
+</script>
 <template>
 <div>
     <div>
@@ -6,14 +62,37 @@
         </div>
         <img src="~/assets/img/logo.png" alt="logo" class="m-auto absolute top-0 bottom-0 left-0 right-0"/>
     </div>
-    <div class="grid grid-cols-3 rounded-3xl">
-        <map-leaf class="grid col-start-1 col-end-3"></map-leaf>
-        <div class="h-[50vh] w-full bg-white grid col-start-3 col-end-4"></div>
+    <div class="grid w-full h-full bg-[#EEE7EF]">
+        <div class="container w-full h-full m-auto">
+            <div class="card flex box-border my-8 mx-auto w-full flex-col rounded-xl drop-shadow-lg p-3 bg-white">
+                <div>
+                    <img src="~/assets/img/plus.png" alt="plus" class="w-4 absolute z-50 left-0 right-0 m-auto top-0 box-content select-none pointer-events-none" id="plus"/>
+                    <map-leaf class="rounded-lg z-10" @mousemove="center()" @touchmove="center()"></map-leaf>
+                </div>
+                
+                <form class="card-form p-[2rem_1rem_0]">
+			        <div v-for="item in form" class="input flex flex-col-reverse relative pt-6 mt-6" :key="item.id">
+				        <input v-if="item.is === 'input'" :type="item.text" :id="item.itemId" class="border-[0] border-b-2 border-solid border-gray-400 text-lg py-1 px-0 focus:outline-0 valid:outline-0 peer" required/>
+                        <select v-if="item.is === 'select'" :id="item.itemId" class="border-[0] border-b-2 border-solid border-gray-400 text-lg py-1 px-0 focus:outline-0 valid:outline-0 peer" title="kategorie" required>
+                            <option v-for="kat in kategorie" :value="kat.type">{{kat.type}}</option>
+                        </select>
+				        <label class="absolute transition-all top-6 text-gray-500 peer-focus:text-[#006B05] peer-valid:text-[#006B05] peer-focus:top-0 peer-valid:top-0 select-none pointer-events-none">{{item.label}}</label>
+			        </div>
+			        <div class="action mt-8">
+				        <button type="button" class="action-button text-xl p-[1em] w-full font-medium bg-[#006B05] rounded-md text-white border-0 focus:outline-0" @click="sendData(compData())">Wyślij zgłoszenie</button>
+			        </div>
+		        </form>
+            </div>
+        </div>
     </div>
     
 </div>
 </template>
-
+<style scoped>
+#plus{
+    transform: translateY(25vh);
+}
+</style>
 <script setup>
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
