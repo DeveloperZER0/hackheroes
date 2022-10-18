@@ -7,7 +7,7 @@ export default {
     data() {
         return {
             form:  [{id:1,is:'input',type:'text',label:'Tytuł zgłoszenia',itemId:'title'},
-                    {id:2,is:'input',type:'text',label:'Koordynaty miejsca na mapie',itemId:'coords'},
+                    {id:2,is:'input',type:'text',label:'Koordynaty miejsca na mapie',itemId:'coords', readonly: true},
                     {id:3,is:'select',type:'',label:'Wybierz kategorię zgłoszenia',itemId:'select'}
             ],
             kategorie: [],
@@ -71,11 +71,11 @@ export default {
                 
                 <form class="card-form p-[2rem_1rem_0]">
 			        <div v-for="item in form" class="input flex flex-col-reverse relative pt-6 mt-6" :key="item.id">
-				        <input v-if="item.is === 'input'" :type="item.text" :id="item.itemId" class="border-[0] border-b-2 border-solid border-gray-400 text-lg py-1 px-0 focus:outline-0 valid:outline-0 peer" required/>
+				        <input v-if="item.is === 'input'" :type="item.text" :id="item.itemId" class="border-[0] border-b-2 border-solid border-gray-400 text-lg py-1 px-0 focus:outline-0 valid:outline-0 peer" required v-bind:readonly='item.readonly'/>
                         <select v-if="item.is === 'select'" :id="item.itemId" class="border-[0] border-b-2 border-solid border-gray-400 text-lg py-1 px-0 focus:outline-0 valid:outline-0 peer" title="kategorie" required>
                             <option v-for="kat in kategorie" :value="kat.type">{{kat.type}}</option>
                         </select>
-				        <label class="absolute transition-all top-6 text-gray-500 peer-focus:text-[#006B05] peer-valid:text-[#006B05] peer-focus:top-0 peer-valid:top-0 select-none pointer-events-none">{{item.label}}</label>
+				        <label class="absolute transition-all top-6 text-gray-500 peer-focus:text-[#006B05] peer-valid:text-[#006B05] peer-focus:top-0 peer-valid:top-0 select-none pointer-events-none peer-read-only:top-0 peer-read-only:text-[#006B05]">{{item.label}}</label>
 			        </div>
 			        <div class="action mt-8">
 				        <button type="button" class="action-button text-xl p-[1em] w-full font-medium bg-[#006B05] rounded-md text-white border-0 focus:outline-0" @click="sendData(compData())">Wyślij zgłoszenie</button>
