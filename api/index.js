@@ -6,9 +6,13 @@ var cors = require('cors')
 const app = express()
 
 app.use(cors())
-app.get('/', async (req, res) => {
+app.get('/markers', async (req, res) => {
     const allMarkers = await prisma.post.findMany()
     res.json(allMarkers)
+})
+app.post('/receive', (req, res) => {
+    console.log(req.body);
+    res.sendStatus(200);
 })
 
 app.listen(3000, () =>
