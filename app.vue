@@ -7,6 +7,10 @@ export default {
           rel: 'stylesheet',
           href: 'https://unpkg.com/leaflet@1.9.2/dist/leaflet.css',
         },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/icon?family=Material+Icons'
+        },
       ],
     }
   },

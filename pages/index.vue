@@ -1,7 +1,6 @@
 <script>
 import {mapLeaflet} from '@/components/mapLeaf.vue'
 import L, { marker, addLayer, latLng } from "leaflet";
-import { exit } from 'process';
 var Marker;
 var latCenter,lngCenter;
 export default {
