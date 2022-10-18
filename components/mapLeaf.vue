@@ -10,10 +10,10 @@ export default {
   },
   methods: {
     async getData() {
-      this.markers = await fetch("https://hackheroesmarkers.onrender.com").then((res) => res.json());
+      this.markers = await fetch("https://api-spotted-developerzer0.vercel.app/markers").then((res) => res.json());
     },
     async sendData(data = {}) {
-      await fetch("https://hackheroesmarkers.onrender.com/receive", {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)})
+      await fetch("https://api-spotted-developerzer0.vercel.app/receive", {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)})
     },
     addMarker(event) {
       L.marker(this.map.getCenter()).addTo(this.map);
