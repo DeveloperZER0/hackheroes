@@ -39,13 +39,13 @@ export default {
     });
     var propozycja = L.divIcon({
 	      className: 'ikona',
-        html: "<div style='background-color:#444444;' class='marker-pin'></div><i class='material-icons'>mark_unread_chat_alt</i>",
+        html: "<div style='background-color:#00ff55;' class='marker-pin'></div><i class='material-icons'>mark_unread_chat_alt</i>",
         iconSize: [30, 42],
         iconAnchor: [15, 42]
     });
     var ogloszenie = L.divIcon({
 	      className: 'ikona',
-        html: "<div style='background-color:#444444;' class='marker-pin'></div><i class='material-icons'>campaign</i>",
+        html: "<div style='background-color:#00e5ff;' class='marker-pin'></div><i class='material-icons'>campaign</i>",
         iconSize: [30, 42],
         iconAnchor: [15, 42]
     });
