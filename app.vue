@@ -2,6 +2,7 @@
 export default {
   head() {
     return {
+      title: 'SPOTTED',
       link: [
         {
           rel: 'stylesheet',
