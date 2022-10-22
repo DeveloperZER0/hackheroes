@@ -37,6 +37,18 @@ export default {
         iconSize: [30, 42],
         iconAnchor: [15, 42]
     });
+    var propozycja = L.divIcon({
+	      className: 'ikona',
+        html: "<div style='background-color:#444444;' class='marker-pin'></div><i class='material-icons'>mark_unread_chat_alt</i>",
+        iconSize: [30, 42],
+        iconAnchor: [15, 42]
+    });
+    var ogloszenie = L.divIcon({
+	      className: 'ikona',
+        html: "<div style='background-color:#444444;' class='marker-pin'></div><i class='material-icons'>campaign</i>",
+        iconSize: [30, 42],
+        iconAnchor: [15, 42]
+    });
     
     this.map = L.map("map").setView([51.5, -0.09], 5);
     this.map.flyTo([52.0692924089, 19.4803067985], 6.75);
@@ -53,6 +65,10 @@ export default {
         ikona = wypadek;
       } else if (this.markers[i].categoryType === "Obiekt nie istnieje") {
         ikona = obiekt;
+      } else if (this.markers[i].categoryType === "Propozycja") {
+        ikona = propozycja;
+      } else if (this.markers[i].categoryType === "Ogłoszenie") {
+        ikona = ogloszenie;
       }
       L.marker([this.markers[i].lat, this.markers[i].lon], {icon: ikona}).addTo(this.map).bindPopup(this.markers[i].desc + "<br>Kategoria: " + this.markers[i].categoryType);
     }}
