@@ -60,12 +60,19 @@ export default {
         <!-- <h1 class="text-slate-700 uppercase font-black text-9xl text-center m-auto mix-blend-multiply">SPOTTED</h1> --> 
         </div>
         <img src="~/assets/img/logo.png" alt="logo" class="m-auto absolute top-0 bottom-0 left-0 right-0"/>
+        <div class="scroll-downs">
+            <div class="mousey">
+                <div class="scroller"></div>
+            </div>
+        </div>
     </div>
     <div class="grid w-full h-full bg-[#EEE7EF]">
         <div class="container w-full h-full m-auto">
             <div class="card flex box-border my-8 mx-auto w-full flex-col rounded-xl drop-shadow-lg p-3 bg-white">
-                <div>
-                    <img src="~/assets/img/plus.png" alt="plus" class="w-4 absolute z-50 left-0 right-0 m-auto top-0 box-content select-none pointer-events-none" id="plus"/>
+                <div class="relative">
+                    <div class="absolute z-50 flex items-center top-0 left-0 right-0 h-full select-none pointer-events-none">
+                        <img src="~/assets/img/plus.png" alt="plus" class="w-4 m-auto" id="plus"/>
+                    </div>
                     <map-leaf class="rounded-lg z-10" @mousemove="center()" @touchmove="center()"></map-leaf>
                 </div>
                 
@@ -84,12 +91,70 @@ export default {
             </div>
         </div>
     </div>
-    
+    <div class="grid w-full h-full bg-[#ebe7ef]">
+        <div class="container w-full h-full m-auto">
+            <div class="card flex box-border my-8 mx-auto w-full flex-col rounded-xl drop-shadow-lg p-3 bg-white">
+                <h1 class="p-3 text-center text-3xl uppercase font-bold text-white bg-[#006B05] rounded-xl mx-auto my-2">O projekcie</h1>
+                <div class="p-1">
+                <p>
+                    Portal „Spotted“ umożliwia łatwiejszy kontakt z odpowiednimi służbami w celu zgłoszenia wszelakich problemów w mieście bądź zaproponowania sposobu na poprawę danych obiektów.
+                    <p>
+                        Jednocześnie nie wymaga od użytkowników podawania żadnych danych ani udawania się nigdzie w celu wykonania takiego zgłoszenia.
+                    </p>
+                    <p>
+                        Jest to proste rozwiązanie ułatwiające życie obywatelom, a co najważniejsze łatwy w obsłudze.
+                    </p>
+                    <p>
+                        Posiada również opcję ogłoszeń. Dzięki niej można ułatwić zarówno odnalezienie zgubionego psa czy poinformować fanów muzyki o koncercie rockowym.
+                    </p>
+                </p>
+                <br>
+                <p>
+                    <h2 class="my-1 text-xl text-[#006B05]">Plan na rozwój:</h2>
+                    Chcemy zaistnieć jako patent aniżeli osobny portal, aby móc zintegrować nasz system z aplikacjami map (Google Maps, Apple Maps itd.) tym bardziej poszerzając funkcjonalność i zwiększając powszechność Spotted’u. Chcemy również wprowadzić system preferencji użytkownika, gdzie sztuczna inteligencja pomoże wyświetlać obiekty, które mogą go interesować w szczególności. AI pomoże również w administrowaniu całym serwisem, usuwając spam, czy indeksując obiekty automatycznie.
+                </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-white p-3 text-gray-400 text-center font-semibold drop-shadow-lg">
+        SPOTTED &copy; Wiktor Piwowar &bullet; Maksymilian Regner
+    </footer>
 </div>
 </template>
 <style scoped>
-#plus{
-    transform: translateY(25vh);
+.scroll-downs {
+  position: absolute;
+  right: 0;
+  bottom: 50px;
+  left: 0;
+  margin: auto;
+  width :34px;
+  height: 55px;
+}
+.mousey {
+  width: 3px;
+  padding: 10px 15px;
+  height: 35px;
+  border: 2px solid #fff;
+  border-radius: 25px;
+  opacity: 0.75;
+  box-sizing: content-box;
+}
+.scroller {
+  width: 3px;
+  height: 10px;
+  border-radius: 25%;
+  background-color: #fff;
+  animation-name: scroll;
+  animation-duration: 1.5s;
+  animation-timing-function: cubic-bezier(.15,.41,.69,.94);
+  animation-iteration-count: infinite;
+}
+@keyframes scroll {
+  0% { opacity: 0; }
+  10% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(15px); opacity: 0;}
 }
 </style>
 <script setup>
